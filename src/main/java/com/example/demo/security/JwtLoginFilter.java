@@ -1,8 +1,9 @@
-package com.example.security;
+package com.example.demo.security;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.utils.JwtTokenUtils;
+import com.example.demo.utils.HttpUtils;
+import com.example.demo.utils.JwtTokenUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
@@ -30,8 +31,8 @@ import java.nio.charset.Charset;
  * @date 2019/8/15 16:06
  * @description 登录认证触发过滤器
  *
- * JwtLoginFilter 是在通过访问 /login 的POST请求时首先被触发的过滤器,
- * 默认实现是UsernamePasswordAuthenticationFilter,它继承了AbstractAuthenticationProcessingFilter,
+ * JwtLoginFilter 是在通过访问 /login 的POST请求时首先被触发的过滤器,默认
+ * 实现是UsernamePasswordAuthenticationFilter,它继承了AbstractAuthenticationProcessingFilter,
  * 抽象父类的 doFilter 定义了登录认证的大致操作流程,这里我们的JwtLoginFilter 继承了UsernamePasswordAuthenticationFilter,
  * 并进行了两个主要内容的定制。
  *
@@ -68,7 +69,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
      * 认证方法
      */
     @Override
-    public Authentication attemtAuthentication(HttpServletRequest request
+    public Authentication attemptAuthentication(HttpServletRequest request
             , HttpServletResponse response) throws AuthenticationException {
         /**
          * 可以在此覆写尝试进行登录认证的逻辑, 登录成功之后等操作不在此方法内
@@ -97,7 +98,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
      */
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response
-            , FilterChain chain, Authentication authResult) throws  IOException, ServletException{
+            , FilterChain chain, Authentication authResult) throws IOException {
         // 存储登录认证信息到上下文
         SecurityContextHolder.getContext().setAuthentication(authResult);
 
@@ -123,7 +124,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
      * @param request 请求
      * @return String
      */
-    public String getBody(HttpServletRequest request){
+    private String getBody(HttpServletRequest request){
         StringBuilder sb = new StringBuilder();
         InputStream is = null;
         BufferedReader br = null;

@@ -1,6 +1,8 @@
-package com.example.config;
+package com.example.demo.config;
 
-import com.example.security.JwtLoginFilter;
+import com.example.demo.security.JwtAuthenticationFilter;
+import com.example.demo.security.JwtAuthenticationProvider;
+import com.example.demo.security.JwtLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,13 +56,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Override
-    public void configure(AuthenticationManagerBuilder auth)throws Exception {
+    public void configure(AuthenticationManagerBuilder auth) {
         // 使用自定义登录身份认证组件
         auth.authenticationProvider(new JwtAuthenticationProvider(userDetailsService));
     }
 
     @Override
-    protected void configure(HttpSecurity http)throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         // 禁用 csrf, 由于使用的是JWT, 我们这里不需要csrf
         http.cors().and().csrf().disable()
                 .authorizeRequests()
@@ -94,6 +96,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public AuthenticationManager authenticationManager() throws Exception{
-        return  super.authenticationManager();
+        return super.authenticationManager();
     }
 }
