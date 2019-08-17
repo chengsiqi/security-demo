@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
  * @date 2019/8/16 14:07
  * @description
  **/
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

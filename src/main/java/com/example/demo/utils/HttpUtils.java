@@ -1,8 +1,6 @@
 package com.example.demo.utils;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.security.JwtAuthenticationToken;
 import com.example.demo.vo.HttpResult;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +14,6 @@ import java.io.IOException;
  * @description
  **/
 public class HttpUtils {
-
 
     /**
      * 输出信息到浏览器

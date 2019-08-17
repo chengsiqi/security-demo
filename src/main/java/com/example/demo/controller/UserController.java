@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.vo.HttpResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,18 +21,21 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('sys:user:view')")
     @GetMapping("/findAll")
+    @ApiOperation("测试权限 查询所有用户")
     public HttpResult findAll(){
         return HttpResult.ok("this findAll service is called success.");
     }
 
     @PreAuthorize("hasAuthority('sys:user:edit')")
-    @GetMapping("edit")
+    @GetMapping("/edit")
+    @ApiOperation("测试权限 编辑用户")
     public HttpResult edit(){
         return HttpResult.ok("this edit service is called success.");
     }
 
     @PreAuthorize("hasAuthority('sys:user:delete')")
-    @GetMapping("delete")
+    @GetMapping("/delete")
+    @ApiOperation("查询权限 删除用户")
     public HttpResult delete(){
         return HttpResult.ok("this delete service is called success.");
     }

@@ -22,9 +22,9 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         User user = new User();
         user.setId(1L);
-        user.setUsername("张上哪");
+        user.setUsername("admin");
         // 使用BCrypt 对密码进行编码
-        String password = new BCryptPasswordEncoder().encode("1234");
+        String password = new BCryptPasswordEncoder().encode("123");
         user.setPassword(password);
         return user;
     }

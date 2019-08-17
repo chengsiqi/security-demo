@@ -51,7 +51,6 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -85,8 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * 即将 WebSecurityConfig 中的以下配置项注释即可, 否则访问LoginController中的登录接口会被过滤拦截, 执行不会进入LoginController 中的登录接口
          */
         // 开启登录认证流程过滤器, 如果使用LoginController的login接口, 需要注释掉此过滤器，根据使用习惯二选一即可
-        http.addFilterBefore(new JwtLoginFilter(authenticationManager()),
-                UsernamePasswordAuthenticationFilter.class);
+        /*http.addFilterBefore(new JwtLoginFilter(authenticationManager()),
+                UsernamePasswordAuthenticationFilter.class);*/
 
         // 访问控制时登录状态检查过滤器
         http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager()),
