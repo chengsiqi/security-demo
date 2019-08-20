@@ -85,6 +85,15 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
 
+        if (username == null) {
+            username = "";
+        }
+
+        if (password == null) {
+            password = "";
+        }
+
+        username = username.trim();
         JwtAuthenticationToken authRequest = new JwtAuthenticationToken(username, password);
 
         // Allow subclasses to set the "details" property

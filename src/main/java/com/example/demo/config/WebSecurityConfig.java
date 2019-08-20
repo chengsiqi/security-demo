@@ -22,6 +22,12 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
  * Authentication   认证
  * Authorization    授权
  *
+ * Spring Security 应用级别的安全主要包含两个主要部分，即登录认证（Authentication）和访问授权（Authorization）
+ *
+ * 首先用户登录的时候传入登录信息，登录验证器完成登录认证并将登录认证好的信息存储到请求上下文,
+ * 然后再进行其他操作, 如在进行接口访问、方法调用时, 权限认证器从上下文中获取登录认证信息,
+ * 然后根据认证信息获取权限信息, 通过权限信息和特定的授权策略决定是否授权。
+ *
  * @author 程思琦
  * @date 2019/8/15 11:29
  * @description 安全配置类
@@ -84,8 +90,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * 即将 WebSecurityConfig 中的以下配置项注释即可, 否则访问LoginController中的登录接口会被过滤拦截, 执行不会进入LoginController 中的登录接口
          */
         // 开启登录认证流程过滤器, 如果使用LoginController的login接口, 需要注释掉此过滤器，根据使用习惯二选一即可
-        /*http.addFilterBefore(new JwtLoginFilter(authenticationManager()),
-                UsernamePasswordAuthenticationFilter.class);*/
+        http.addFilterBefore(new JwtLoginFilter(authenticationManager()),
+                UsernamePasswordAuthenticationFilter.class);
 
         // 访问控制时登录状态检查过滤器
         http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager()),
